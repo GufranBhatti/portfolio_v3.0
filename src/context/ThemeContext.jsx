@@ -11,15 +11,37 @@ export function ThemeProvider({ children }) {
     return localStorage.getItem('theme') === 'light' ? 'light' : 'dark';
   });
 
+  // The actual flip is deferred to ThemeTransition.jsx's plug-in/plug-out
+  // animation — toggling the switch doesn't change `theme` immediately.
+  // `requestToggle` only arms `pendingTheme`; the overlay calls
+  // `commitPendingTheme` at the moment the mascot's plug connects/disconnects.
+  const [pendingTheme, setPendingTheme] = useState(null);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-  const toggleTheme = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'));
+  const requestToggle = () => {
+    if (isTransitioning) return;
+    setPendingTheme(theme === 'dark' ? 'light' : 'dark');
+    setIsTransitioning(true);
+  };
+
+  const commitPendingTheme = () => {
+    setTheme((current) => pendingTheme || (current === 'dark' ? 'light' : 'dark'));
+  };
+
+  const endTransition = () => {
+    setIsTransitioning(false);
+    setPendingTheme(null);
+  };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider
+      value={{ theme, toggleTheme: requestToggle, isTransitioning, pendingTheme, commitPendingTheme, endTransition }}
+    >
       {children}
     </ThemeContext.Provider>
   );

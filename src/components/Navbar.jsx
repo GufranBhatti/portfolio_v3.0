@@ -13,7 +13,7 @@ const links = [
 ];
 
 export default function Navbar() {
-  const { theme, toggleTheme } = useTheme();
+  const { theme, toggleTheme, isTransitioning } = useTheme();
 
   return (
     <motion.nav
@@ -48,6 +48,7 @@ export default function Navbar() {
 
       <button
         onClick={toggleTheme}
+        disabled={isTransitioning}
         aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
         style={{
           marginLeft: 'auto',
@@ -57,7 +58,8 @@ export default function Navbar() {
           background: 'none',
           border: '1px solid var(--border-strong)',
           padding: '2px',
-          flexShrink: 0
+          flexShrink: 0,
+          opacity: isTransitioning ? 0.4 : 1
         }}
       >
         <motion.span

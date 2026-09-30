@@ -15,6 +15,7 @@ import Publications from './components/Publications';
 import AskGB from './components/AskGB';
 import Contact from './components/Contact';
 import CustomCursor from './components/CustomCursor';
+import ThemeTransition from './components/ThemeTransition';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -29,6 +30,7 @@ function App() {
   return (
     <ThemeProvider>
       <CustomCursor />
+      <ThemeTransition />
       <AnimatePresence mode="wait">
         {loading && <SplashScreen key="splash" />}
       </AnimatePresence>
