@@ -27,7 +27,7 @@ export default function Education() {
           >
             <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem', color: 'var(--accent)' }}>Bachelor of Science in Computer Science (BSCS)</h3>
             <h4 style={{ fontSize: '1.2rem', color: 'var(--fg)', marginBottom: '1rem' }}>PAF-KIET — Karachi Institute of Economics & Technology</h4>
-            <p style={{ color: '#a1a1aa', fontFamily: 'var(--font-mono)' }}>Karachi, Pakistan • 2019 – 2023</p>
+            <p style={{ color: 'var(--muted)', fontFamily: 'var(--font-mono)' }}>Karachi, Pakistan • 2019 – 2023</p>
           </motion.div>
         </div>
       </div>

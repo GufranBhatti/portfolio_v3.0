@@ -68,15 +68,15 @@ function RoleCard({ role, idx }) {
       <div>
         <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'var(--accent)' }}>{role.dates}</p>
         <h3 style={{ fontSize: '1.4rem', marginTop: '0.6rem', color: 'var(--fg)' }}>{role.title}</h3>
-        <p style={{ color: '#d4d4d8', fontSize: '0.95rem', marginTop: '0.4rem' }}>{role.company}</p>
-        <p style={{ color: '#71717a', fontSize: '0.85rem', fontFamily: 'var(--font-mono)' }}>{role.location}{role.note ? ` — ${role.note}` : ''}</p>
+        <p style={{ color: 'var(--muted)', fontSize: '0.95rem', marginTop: '0.4rem' }}>{role.company}</p>
+        <p style={{ color: 'var(--muted-strong)', fontSize: '0.85rem', fontFamily: 'var(--font-mono)' }}>{role.location}{role.note ? ` — ${role.note}` : ''}</p>
       </div>
       <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         {role.bullets.map((b, i) => {
           const [label, ...rest] = b.split(':');
           const detail = rest.join(':').trim();
           return (
-            <li key={i} style={{ display: 'flex', gap: '0.75rem', color: '#a1a1aa', fontSize: '1rem', lineHeight: 1.6 }}>
+            <li key={i} style={{ display: 'flex', gap: '0.75rem', color: 'var(--muted)', fontSize: '1rem', lineHeight: 1.6 }}>
               <span style={{ color: 'var(--accent-secondary)', flexShrink: 0 }}>▹</span>
               <span>
                 <strong style={{ color: 'var(--fg)', fontWeight: 600 }}>{label}:</strong> {detail}

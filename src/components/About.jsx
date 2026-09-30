@@ -30,6 +30,12 @@ const stages = [
 // Scroll-pinned narrative: the photo stays fixed in view while the section
 // scrolls through it, and text stages crossfade in sequence tied to scroll
 // progress — replaces the old static profile paragraph.
+//
+// Every color in this component is pinned to fixed dark values on purpose,
+// not theme variables: this is a full-bleed photograph with a dramatic dark
+// treatment, and flipping that to light mode washes the photo out and makes
+// the overlaid text illegible. It stays a fixed "cinematic" section
+// regardless of the site-wide theme toggle.
 export default function About() {
   const sectionRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -50,7 +56,7 @@ export default function About() {
 
   return (
     <section ref={sectionRef} style={{ height: '350vh', position: 'relative' }}>
-      <div style={{ position: 'sticky', top: 0, height: '100vh', backgroundColor: 'var(--bg)' }}>
+      <div style={{ position: 'sticky', top: 0, height: '100vh', backgroundColor: '#09090b' }}>
 
         {/* Photo — subtly zooms out over the whole scroll, giving the
             "image moves" cue instead of sitting static. Clipped to this
@@ -95,7 +101,7 @@ export default function About() {
             left: '3rem',
             fontFamily: 'var(--font-mono)',
             fontSize: '0.9rem',
-            color: 'var(--accent)',
+            color: '#d9f99d',
             letterSpacing: '0.05em'
           }}
         >
@@ -112,7 +118,7 @@ export default function About() {
             gap: '2.5rem',
             fontFamily: 'var(--font-mono)',
             fontSize: '0.8rem',
-            color: 'var(--accent)'
+            color: '#d9f99d'
           }}
         >
           <span>EXP: 3+ YRS</span>
@@ -139,7 +145,7 @@ export default function About() {
             >
               <div style={{ maxWidth: '900px', margin: '0 auto', width: '100%' }}>
                 {stage.kind === 'headline' ? (
-                  <h2 style={{ fontSize: 'clamp(2.5rem, 5.5vw, 5rem)', color: 'var(--fg)', margin: 0, lineHeight: 1 }}>
+                  <h2 style={{ fontSize: 'clamp(2.5rem, 5.5vw, 5rem)', color: '#fafafa', margin: 0, lineHeight: 1 }}>
                     {stage.text}
                   </h2>
                 ) : (
@@ -147,14 +153,14 @@ export default function About() {
                     <p style={{ fontFamily: 'var(--font-mono)', fontSize: '1rem', color: '#a1a1aa', marginBottom: '0.5rem' }}>
                       {stage.lead}
                     </p>
-                    <h3 style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)', color: 'var(--accent)', margin: 0, marginBottom: '2rem' }}>
+                    <h3 style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)', color: '#d9f99d', margin: 0, marginBottom: '2rem' }}>
                       {stage.highlight}
                     </h3>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                       {stage.points.map((point, pi) => (
-                        <div key={pi} style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', borderTop: '1px solid var(--border)', paddingTop: '1rem' }}>
-                          <span style={{ color: 'var(--accent)', fontFamily: 'var(--font-mono)', fontSize: '1.1rem' }}>✓</span>
-                          <p style={{ fontSize: '1.1rem', color: 'var(--fg)', lineHeight: 1.5, margin: 0 }}>{point}</p>
+                        <div key={pi} style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', borderTop: '1px solid rgba(255,255,255,0.15)', paddingTop: '1rem' }}>
+                          <span style={{ color: '#d9f99d', fontFamily: 'var(--font-mono)', fontSize: '1.1rem' }}>✓</span>
+                          <p style={{ fontSize: '1.1rem', color: '#fafafa', lineHeight: 1.5, margin: 0 }}>{point}</p>
                         </div>
                       ))}
                     </div>

@@ -71,7 +71,7 @@ export default function Contact() {
           style={{
             position: 'absolute',
             inset: 0,
-            background: 'linear-gradient(180deg, rgba(9,9,11,0.2) 0%, rgba(9,9,11,0.55) 55%, var(--bg) 100%)'
+            background: 'linear-gradient(180deg, rgba(var(--bg-rgb),0.2) 0%, rgba(var(--bg-rgb),0.55) 55%, var(--bg) 100%)'
           }}
         />
       </div>
@@ -81,7 +81,7 @@ export default function Contact() {
         style={{
           position: 'absolute',
           inset: 0,
-          backgroundImage: 'linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)',
+          backgroundImage: 'linear-gradient(rgba(var(--fg-rgb),0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(var(--fg-rgb),0.04) 1px, transparent 1px)',
           backgroundSize: '4rem 4rem',
           pointerEvents: 'none'
         }}
@@ -96,7 +96,7 @@ export default function Contact() {
           WebkitMaskImage: spotlightMask,
           maskImage: spotlightMask,
           backgroundImage:
-            'radial-gradient(circle, rgba(217,249,157,0.15), transparent 60%), linear-gradient(rgba(217,249,157,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(217,249,157,0.3) 1px, transparent 1px)',
+            'radial-gradient(circle, rgba(var(--accent-rgb),0.15), transparent 60%), linear-gradient(rgba(var(--accent-rgb),0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(var(--accent-rgb),0.3) 1px, transparent 1px)',
           backgroundSize: '100% 100%, 4rem 4rem, 4rem 4rem'
         }}
       />
@@ -117,15 +117,16 @@ export default function Contact() {
               <SignatureText text="Gufran Bhatti" fontSize={130} height={220} />
             </div>
 
-            <p style={{ color: '#a1a1aa', fontSize: '1.2rem', marginTop: '1.5rem', marginBottom: '3rem', maxWidth: '600px', marginLeft: 'auto', marginRight: 'auto' }}>
+            <p style={{ color: 'var(--muted)', fontSize: '1.2rem', marginTop: '1.5rem', marginBottom: '3rem', maxWidth: '600px', marginLeft: 'auto', marginRight: 'auto' }}>
               Open to new opportunities in Full Stack Development, AI Engineering, and Backend Architecture.
             </p>
 
             <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center', flexWrap: 'wrap' }}>
               <motion.a
                 href="mailto:gufranbhatti5@gmail.com"
-                style={{ backgroundColor: 'var(--accent)', color: 'var(--bg)', padding: '1rem 3rem', fontSize: '1.2rem', fontWeight: 'bold', fontFamily: 'var(--font-mono)' }}
-                whileHover={{ scale: 1.05, backgroundColor: 'var(--fg)' }}
+                className="btn-primary"
+                style={{ padding: '1rem 3rem', fontSize: '1.2rem', fontWeight: 'bold', fontFamily: 'var(--font-mono)' }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 TRANSMIT_EMAIL
@@ -133,8 +134,9 @@ export default function Contact() {
               <motion.a
                 href="https://www.linkedin.com/in/gufran-bhatti-80568822a/"
                 target="_blank"
-                style={{ border: '1px solid var(--border-strong)', color: 'var(--fg)', padding: '1rem 3rem', fontSize: '1.2rem', fontFamily: 'var(--font-mono)' }}
-                whileHover={{ scale: 1.05, borderColor: 'var(--accent)', color: 'var(--accent)' }}
+                className="btn-outline"
+                style={{ padding: '1rem 3rem', fontSize: '1.2rem', fontFamily: 'var(--font-mono)' }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 LINKEDIN
@@ -142,8 +144,9 @@ export default function Contact() {
               <motion.a
                 href="https://github.com/GufranBhatti"
                 target="_blank"
-                style={{ border: '1px solid var(--border-strong)', color: 'var(--fg)', padding: '1rem 3rem', fontSize: '1.2rem', fontFamily: 'var(--font-mono)' }}
-                whileHover={{ scale: 1.05, borderColor: 'var(--accent)', color: 'var(--accent)' }}
+                className="btn-outline"
+                style={{ padding: '1rem 3rem', fontSize: '1.2rem', fontFamily: 'var(--font-mono)' }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 GITHUB
@@ -154,8 +157,10 @@ export default function Contact() {
         </div>
       </div>
 
-      {/* Footer directory */}
-      <div style={{ position: 'relative', borderTop: '1px solid var(--border)', padding: '4rem 2rem' }}>
+      {/* Footer directory — stays transparent over the photo, no divider
+          line (a line here just floats awkwardly over the still-visible
+          photo since it hasn't fully faded by this point in the section) */}
+      <div style={{ position: 'relative', padding: '4rem 2rem' }}>
         <div
           style={{
             maxWidth: '1400px',
@@ -168,7 +173,7 @@ export default function Contact() {
         >
           <div>
             <p style={{ fontFamily: 'var(--font-mono)', fontWeight: 'bold', fontSize: '1.2rem', color: 'var(--fg)' }}>GB_</p>
-            <p style={{ color: '#71717a', fontSize: '0.9rem', marginTop: '1rem', lineHeight: 1.6, maxWidth: '260px' }}>
+            <p style={{ color: 'var(--muted-strong)', fontSize: '0.9rem', marginTop: '1rem', lineHeight: 1.6, maxWidth: '260px' }}>
               AI Engineer & Full-Stack Developer building intelligent systems and immersive interfaces.
             </p>
           </div>
@@ -177,7 +182,7 @@ export default function Contact() {
             <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'var(--accent)', marginBottom: '1.25rem', letterSpacing: '0.05em' }}>QUICK LINKS</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               {quickLinks.map(link => (
-                <a key={link.href} href={link.href} style={{ color: '#a1a1aa', fontSize: '0.95rem' }}>{link.label}</a>
+                <a key={link.href} href={link.href} style={{ color: 'var(--muted)', fontSize: '0.95rem' }}>{link.label}</a>
               ))}
             </div>
           </div>
@@ -186,7 +191,7 @@ export default function Contact() {
             <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'var(--accent)', marginBottom: '1.25rem', letterSpacing: '0.05em' }}>CONNECT</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               {connectLinks.map(link => (
-                <a key={link.href} href={link.href} target="_blank" rel="noreferrer" style={{ color: '#a1a1aa', fontSize: '0.95rem' }}>{link.label}</a>
+                <a key={link.href} href={link.href} target="_blank" rel="noreferrer" style={{ color: 'var(--muted)', fontSize: '0.95rem' }}>{link.label}</a>
               ))}
             </div>
           </div>
@@ -195,7 +200,7 @@ export default function Contact() {
             <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'var(--accent)', marginBottom: '1.25rem', letterSpacing: '0.05em' }}>BUILT WITH</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               {builtWith.map(tool => (
-                <span key={tool} style={{ color: '#a1a1aa', fontSize: '0.95rem', fontFamily: 'var(--font-mono)' }}>{tool}</span>
+                <span key={tool} style={{ color: 'var(--muted)', fontSize: '0.95rem', fontFamily: 'var(--font-mono)' }}>{tool}</span>
               ))}
             </div>
           </div>

@@ -1,11 +1,21 @@
 :root {
-  /* Industrial Brutalist Palette */
+  /* Industrial Brutalist Palette — dark (default) */
   --bg: #09090b; /* Zinc 950 */
+  --bg-rgb: 9, 9, 11;
   --fg: #fafafa; /* Zinc 50 */
+  --fg-rgb: 250, 250, 250;
   --accent: #d9f99d; /* Lime 200 - High vis */
+  --accent-rgb: 217, 249, 157;
   --accent-secondary: #f97316; /* Orange 500 - Safety */
   --border: rgba(255, 255, 255, 0.15);
   --border-strong: rgba(255, 255, 255, 0.4);
+  --muted: #a1a1aa; /* Zinc 400 — secondary text */
+  --muted-strong: #71717a; /* Zinc 500 — tertiary/faint text */
+  /* For text sitting on a var(--fg)-colored (inverted) surface, e.g. the
+     Publications card — deliberately the mirror of --muted/--muted-strong
+     since the surface itself is already inverted relative to the page */
+  --muted-inverted: #52525b; /* Zinc 600 */
+  --muted-inverted-strong: #3f3f46; /* Zinc 700 */
 
   /* Typography */
   --font-display: 'Outfit', sans-serif;
@@ -14,6 +24,25 @@
 
   /* Layout */
   --grid-gap: 1px;
+}
+
+/* Light mode — same brutalist structure, re-tuned for contrast on a bright
+   background. The accent shifts to a darker olive since the neon lime reads
+   as a highlight on dark but fails contrast on white. */
+:root[data-theme='light'] {
+  --bg: #f2f2ef;
+  --bg-rgb: 242, 242, 239;
+  --fg: #101012;
+  --fg-rgb: 16, 16, 18;
+  --accent: #4d7c0f; /* Lime 700 — same family, dark enough for AA contrast on white */
+  --accent-rgb: 77, 124, 15;
+  --accent-secondary: #c2410c; /* Orange 700 */
+  --border: rgba(0, 0, 0, 0.12);
+  --border-strong: rgba(0, 0, 0, 0.35);
+  --muted: #52525b; /* Zinc 600 */
+  --muted-strong: #71717a; /* Zinc 500 */
+  --muted-inverted: #a1a1aa; /* Zinc 400 */
+  --muted-inverted-strong: #d4d4d8; /* Zinc 300 */
 }
 
 * {
@@ -34,6 +63,7 @@ body {
   font-family: var(--font-body);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 a, button {
@@ -87,4 +117,59 @@ h1, h2, h3, h4, h5, h6 {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+/* Hover color treatments live here in plain CSS, not as Framer Motion
+   whileHover/variants targets. Framer resolves a var(--x) color target once
+   via getComputedStyle when a hover animation starts, then leaves that
+   frozen value as an inline style after the mouse leaves (there's nothing
+   to explicitly animate back to) — so a theme switch after hovering an
+   element leaves it stuck showing the OLD theme's color. Native :hover
+   re-reads the current CSS variable live on every hover, so it can't go
+   stale like that. */
+.cert-cell {
+  transition: background-color 0.2s ease;
+}
+.cert-cell:hover {
+  background-color: var(--border);
+}
+
+.btn-primary {
+  background-color: var(--accent);
+  color: var(--bg);
+  transition: background-color 0.2s ease;
+}
+.btn-primary:hover {
+  background-color: var(--fg);
+}
+
+.btn-outline {
+  border: 1px solid var(--border-strong);
+  color: var(--fg);
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.btn-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.project-card .project-title {
+  color: var(--fg);
+  transition: color 0.2s ease;
+}
+.project-card .project-desc {
+  color: var(--muted);
+  transition: color 0.2s ease;
+}
+.project-card .project-tag {
+  border: 1px solid var(--border-strong);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.project-card:hover .project-title,
+.project-card:hover .project-desc,
+.project-card:hover .project-tag {
+  color: var(--bg);
+}
+.project-card:hover .project-tag {
+  border-color: var(--bg);
 }

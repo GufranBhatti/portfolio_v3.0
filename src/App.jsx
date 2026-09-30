@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
+import { ThemeProvider } from './context/ThemeContext';
 import SplashScreen from './components/SplashScreen';
 import Navbar from './components/Navbar';
 import RevealSection from './components/RevealSection';
@@ -26,7 +27,7 @@ function App() {
   }, []);
 
   return (
-    <>
+    <ThemeProvider>
       <CustomCursor />
       <AnimatePresence mode="wait">
         {loading && <SplashScreen key="splash" />}
@@ -63,7 +64,7 @@ function App() {
           </RevealSection>
         </main>
       )}
-    </>
+    </ThemeProvider>
   );
 }
 

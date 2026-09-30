@@ -38,16 +38,16 @@ export default function Certifications() {
             const y = useTransform(scrollYProgress, [0, 1], i % 2 === 0 ? [50, -50] : [-50, 50]);
             
             return (
-              <motion.div 
+              <motion.div
                 key={i}
-                className="brutalist-cell"
+                className="brutalist-cell cert-cell"
                 style={{ y, position: 'relative' }}
-                whileHover={{ scale: 0.98, backgroundColor: 'var(--border)' }}
+                whileHover={{ scale: 0.98 }}
                 transition={{ duration: 0.2 }}
               >
                 <h3 style={{ fontSize: '1.2rem', color: 'var(--fg)', marginBottom: '0.5rem' }}>{cert.title}</h3>
                 <p style={{ color: 'var(--accent)', fontFamily: 'var(--font-mono)', fontSize: '0.9rem' }}>{cert.issuer}</p>
-                <p style={{ color: '#71717a', fontSize: '0.8rem', marginTop: '1rem', fontFamily: 'var(--font-mono)' }}>{cert.date}</p>
+                <p style={{ color: 'var(--muted-strong)', fontSize: '0.8rem', marginTop: '1rem', fontFamily: 'var(--font-mono)' }}>{cert.date}</p>
               </motion.div>
             );
           })}

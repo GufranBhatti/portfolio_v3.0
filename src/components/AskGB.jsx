@@ -99,7 +99,7 @@ export default function AskGB() {
           <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', color: 'var(--fg)', margin: 0 }}>
             <TextDisperse>Ask about me</TextDisperse>
           </h2>
-          <p style={{ color: '#a1a1aa', fontSize: '1.05rem', marginTop: '1rem' }}>
+          <p style={{ color: 'var(--muted)', fontSize: '1.05rem', marginTop: '1rem' }}>
             An AI assistant grounded in this portfolio — ask about my skills, experience, or projects.
           </p>
         </motion.div>
@@ -141,7 +141,7 @@ export default function AskGB() {
             }}
           >
             {messages.length === 0 && (
-              <div style={{ margin: 'auto', textAlign: 'center', color: '#71717a', fontSize: '0.95rem', maxWidth: '360px' }}>
+              <div style={{ margin: 'auto', textAlign: 'center', color: 'var(--muted-strong)', fontSize: '0.95rem', maxWidth: '360px' }}>
                 Try asking something like "What AI tools does he use?" or pick a suggestion below.
               </div>
             )}
@@ -191,7 +191,7 @@ export default function AskGB() {
                   style={{
                     background: 'none',
                     border: '1px solid var(--border-strong)',
-                    color: '#a1a1aa',
+                    color: 'var(--muted)',
                     padding: '0.4rem 0.8rem',
                     fontSize: '0.8rem',
                     fontFamily: 'var(--font-mono)'

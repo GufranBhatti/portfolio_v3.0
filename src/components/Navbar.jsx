@@ -1,5 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Sun, Moon } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 
 const links = [
   { label: 'HOME', href: '#home' },
@@ -11,6 +13,8 @@ const links = [
 ];
 
 export default function Navbar() {
+  const { theme, toggleTheme } = useTheme();
+
   return (
     <motion.nav
       initial={{ y: -100 }}
@@ -26,7 +30,7 @@ export default function Navbar() {
         alignItems: 'center',
         gap: '3.5rem',
         zIndex: 50,
-        backgroundColor: 'rgba(9, 9, 11, 0.7)',
+        backgroundColor: 'rgba(var(--bg-rgb), 0.7)',
         backdropFilter: 'blur(14px)',
         WebkitBackdropFilter: 'blur(14px)',
         borderBottom: '1px solid var(--border)'
@@ -41,6 +45,38 @@ export default function Navbar() {
           <a key={href} href={href} style={{ cursor: 'pointer' }}>{label}</a>
         ))}
       </div>
+
+      <button
+        onClick={toggleTheme}
+        aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+        style={{
+          marginLeft: 'auto',
+          position: 'relative',
+          width: '3.4rem',
+          height: '1.8rem',
+          background: 'none',
+          border: '1px solid var(--border-strong)',
+          padding: '2px',
+          flexShrink: 0
+        }}
+      >
+        <motion.span
+          style={{
+            position: 'absolute',
+            top: '2px',
+            bottom: '2px',
+            width: '1.4rem',
+            backgroundColor: 'var(--accent)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+          animate={{ left: theme === 'dark' ? '2px' : 'calc(100% - 1.4rem - 2px)' }}
+          transition={{ type: 'spring', stiffness: 500, damping: 32 }}
+        >
+          {theme === 'dark' ? <Moon size={11} color="var(--bg)" /> : <Sun size={11} color="var(--bg)" />}
+        </motion.span>
+      </button>
     </motion.nav>
   );
 }

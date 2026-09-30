@@ -1,10 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
+
+const INTERACTIVE_SELECTOR = 'a, button, input, textarea, select, [role="button"], [onclick], label';
 
 export default function CustomCursor() {
   const x = useMotionValue(-100);
   const y = useMotionValue(-100);
   const angle = useMotionValue(0);
+  const [isInteractive, setIsInteractive] = useState(false);
   
   // Fast and snappy spring for the cursor position
   const posSpringConfig = { damping: 25, stiffness: 600, mass: 0.2 };
@@ -53,8 +56,27 @@ export default function CustomCursor() {
       lastTime = currentTime;
     };
 
+    // mouseover/mouseout (not enter/leave) so this works via delegation on
+    // a single listener instead of attaching to every interactive element
+    const handleMouseOver = (e) => {
+      if (e.target.closest && e.target.closest(INTERACTIVE_SELECTOR)) {
+        setIsInteractive(true);
+      }
+    };
+    const handleMouseOut = (e) => {
+      if (e.target.closest && e.target.closest(INTERACTIVE_SELECTOR)) {
+        setIsInteractive(false);
+      }
+    };
+
     window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseover', handleMouseOver);
+    document.addEventListener('mouseout', handleMouseOut);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseover', handleMouseOver);
+      document.removeEventListener('mouseout', handleMouseOut);
+    };
   }, [x, y, angle]);
 
   return (
@@ -70,10 +92,22 @@ export default function CustomCursor() {
         zIndex: 9999,
         // Center the cursor exactly on the pointer tip
         translateX: '-50%',
-        translateY: '-50%' 
+        translateY: '-50%'
       }}
+      animate={{ scale: isInteractive ? 1.6 : 1 }}
+      transition={{ type: 'spring', stiffness: 500, damping: 28 }}
     >
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--bg)" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ filter: 'drop-shadow(0px 0px 4px rgba(217, 249, 157, 0.5))' }}>
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill={isInteractive ? 'var(--accent)' : 'var(--bg)'}
+        stroke="var(--accent)"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        style={{ filter: 'drop-shadow(0px 0px 4px rgba(var(--accent-rgb), 0.5))' }}
+      >
         <path d="M12 2L20 22L12 18L4 22L12 2Z" />
       </svg>
     </motion.div>

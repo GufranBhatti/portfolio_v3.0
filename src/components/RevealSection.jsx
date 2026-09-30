@@ -12,8 +12,14 @@ export default function RevealSection({ id, children }) {
     offset: ['start end', 'start start']
   });
 
-  const translateY = useTransform(scrollYProgress, [0, 1], ['10%', '0%']);
-  const scale = useTransform(scrollYProgress, [0, 1], [0.94, 1]);
+  // Kept small on purpose: with a center transform-origin and a larger
+  // offset, this section visibly lags behind its natural flush position
+  // while the previous section scrolls out from under it, exposing a gap
+  // of bare background between them for the whole transition, not just a
+  // brief instant. A small offset + a top-anchored origin keeps the same
+  // "settling into place" feel without ever visibly detaching.
+  const translateY = useTransform(scrollYProgress, [0, 1], ['3%', '0%']);
+  const scale = useTransform(scrollYProgress, [0, 1], [0.98, 1]);
   const radius = useTransform(scrollYProgress, [0, 1], [64, 0]);
   const shadowOpacity = useTransform(scrollYProgress, [0, 1], [0.6, 0]);
   const boxShadow = useTransform(shadowOpacity, (o) => `0 -60px 100px -20px rgba(0,0,0,${o})`);
@@ -26,6 +32,7 @@ export default function RevealSection({ id, children }) {
         position: 'relative',
         zIndex: 2,
         backgroundColor: 'var(--bg)',
+        transformOrigin: 'top',
         translateY,
         scale,
         borderTopLeftRadius: radius,

@@ -28,12 +28,12 @@ export default function Publications() {
           >
             <h3 style={{ fontSize: '1.8rem', marginBottom: '1rem', color: 'var(--bg)' }}>Efficient & Sustainable Intrusion Detection System Using Machine Learning & Deep Learning for IoT</h3>
             
-            <div style={{ display: 'flex', gap: '2rem', marginBottom: '1rem', fontFamily: 'var(--font-mono)', fontSize: '0.9rem', color: '#52525b' }}>
+            <div style={{ display: 'flex', gap: '2rem', marginBottom: '1rem', fontFamily: 'var(--font-mono)', fontSize: '0.9rem', color: 'var(--muted-inverted)' }}>
               <span>IEEE</span>
               <span>April 20, 2023</span>
             </div>
 
-            <p style={{ color: '#3f3f46', lineHeight: 1.6, fontSize: '1.1rem' }}>
+            <p style={{ color: 'var(--muted-inverted-strong)', lineHeight: 1.6, fontSize: '1.1rem' }}>
               Contributed to research on enhancing security frameworks for Internet of Things (IoT) devices by leveraging advanced ML and Deep Learning algorithms to detect network intrusions efficiently.
             </p>
           </motion.div>

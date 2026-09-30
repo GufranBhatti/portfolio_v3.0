@@ -88,7 +88,7 @@ function ProjectCard({ project, idx }) {
     <motion.div 
       ref={ref}
       style={{ y, position: 'relative', overflow: 'hidden', minHeight: '350px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
-      className="brutalist-cell"
+      className="brutalist-cell project-card"
       initial={{ opacity: 0, scale: 0.95 }}
       whileInView={{ opacity: 1, scale: 1 }}
       whileHover="hover"
@@ -108,15 +108,15 @@ function ProjectCard({ project, idx }) {
         <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'var(--border-strong)', marginBottom: '1rem' }}>
           PROJ_0{idx + 1}
         </p>
-        <motion.h3 
-          style={{ fontSize: '2rem', marginBottom: '1rem', color: 'var(--fg)', letterSpacing: '-0.02em' }}
-          variants={{ hover: { color: 'var(--bg)' } }}
+        <motion.h3
+          className="project-title"
+          style={{ fontSize: '2rem', marginBottom: '1rem', letterSpacing: '-0.02em' }}
         >
           {project.title}
         </motion.h3>
-        <motion.p 
-          style={{ color: '#a1a1aa', fontSize: '1.1rem', lineHeight: 1.5 }}
-          variants={{ hover: { color: 'var(--bg)' } }}
+        <motion.p
+          className="project-desc"
+          style={{ fontSize: '1.1rem', lineHeight: 1.5 }}
         >
           {project.desc}
         </motion.p>
@@ -124,10 +124,10 @@ function ProjectCard({ project, idx }) {
 
       <div style={{ position: 'relative', zIndex: 1, display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginTop: '2rem' }}>
         {project.tags.map(tag => (
-          <motion.span 
+          <motion.span
             key={tag}
-            style={{ border: '1px solid var(--border-strong)', padding: '0.3rem 0.8rem', fontSize: '0.8rem', fontFamily: 'var(--font-mono)' }}
-            variants={{ hover: { borderColor: 'var(--bg)', color: 'var(--bg)' } }}
+            className="project-tag"
+            style={{ padding: '0.3rem 0.8rem', fontSize: '0.8rem', fontFamily: 'var(--font-mono)' }}
           >
             {tag}
           </motion.span>
